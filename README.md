@@ -92,28 +92,6 @@ docker-compose exec vulnerable-app /bin/bash
 docker-compose down --rmi all
 ```
 
-### Использование скриптов управления
-
-**Linux/Mac:**
-```bash
-./run.sh up        # Запуск
-./run.sh down      # Остановка
-./run.sh logs      # Логи
-./run.sh rebuild   # Пересборка
-./run.sh shell     # Оболочка
-./run.sh clean     # Очистка
-```
-
-**Windows:**
-```cmd
-run.bat up        # Запуск
-run.bat down      # Остановка
-run.bat logs      # Логи
-run.bat rebuild   # Пересборка
-run.bat shell     # Оболочка
-run.bat clean     # Очистка
-```
-
 ## Примеры использования уязвимостей
 
 ### SQL Injection

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>API Vulnerability Demonstrations</h2>
+
+    <div class="info">
+        <h3>🔍 Уязвимые API эндпоинты:</h3>
+        <ul>
+            <li><code>GET /api/user/&lt;id&gt;</code> - XSS через API</li>
+            <li><code>GET /api/users</code> - IDOR (доступ к данным всех пользователей)</li>
+            <li><code>GET /api/comments</code> - Хранимый XSS в комментариях</li>
+            <li><code>GET /api/admin/stats</code> - Утечка информации (без проверки прав)</li>
+            <li><code>GET /api/search?q=</code> - SQL инъекция</li>
+            <li><code>GET /api/export</code> - Экспорт всех данных</li>
+        </ul>
+    </div>
+
+    <div class="vuln">
+        <h3>Тестирование API:</h3>
+        <button onclick="testAPI()">Тестировать API</button>
+        <div id="api-result"></div>
+    </div>
+
+    <h3>Примеры использования:</h3>
+    <pre>
+// XSS через API
+fetch('/api/user/1').then(r=> r.json()).then(d => console.log(d));
+
+// SQL инъекция
+fetch('/api/search?q=' OR '1'='1').then(r=> r.json()).then(d => console.log(d));
+
+// Получение всех данных
+fetch('/api/export').then(r=> r.json()).then(d => console.log(d));
+    </pre>
+
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = 'Загрузка...';
+            
+            try {
+                const response = await fetch('/api/users');
+                const data = await response.json();
+                resultDiv.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                resultDiv.innerHTML = 'Ошибка: ' + error.message;
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>XXE тест</h2>
+
+    <form method="POST">
+        <textarea name="xml" rows="10" cols="50">
+<?xml version="1.0"?>
+<!DOCTYPE test [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
+<test>&xxe;</test>
+        </textarea><br>
+        <button type="submit">Парсить XML</button>
+    </form>
+    
+    {% if result %}
+        <h3>Результат:</h3>
+        <pre>{{ result }}</pre>
+    {% endif %}
+{% endblock %}

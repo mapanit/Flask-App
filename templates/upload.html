@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Небезопасная загрузка файлов</h2>
+    
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Загрузить</button>
+    </form>
+    
+    <h3>Скачать файл (Path Traversal):</h3>
+    <form action="/file">
+        <input type="text" name="name" placeholder="Имя файла (например: ../../etc/passwd)">
+        <button type="submit">Скачать</button>
+    </form>
+{% endblock %}

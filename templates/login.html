@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Уязвимая форма входа</h2>
+    <p>Примеры для SQLi:</p>
+    <ul>
+        <li><code>' OR '1'='1</code> - обход аутентификации</li>
+        <li><code>admin' --</code> - вход как admin</li>
+        <li><code>' UNION SELECT 1,2,3,4,5 --</code> - union based</li>
+    </ul>
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Логин" required><br><br>
+        <input type="password" name="password" placeholder="Пароль" required><br><br>
+        <button type="submit">Войти</button>
+    </form>
+{% endblock %}

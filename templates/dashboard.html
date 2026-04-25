@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Привет, {{ user }}!</h2>
+
+    <div class="info">
+        <h3>Доступные уязвимые функции:</h3>
+        <ul>
+            <li><a href="/profile/1">Профиль пользователя 1 (IDOR)</a></li>
+            <li><a href="/profile/2">Профиль пользователя 2</a></li>
+            <li><a href="/admin">Админ панель</a></li>
+            <li><a href="/api/data">Уязвимый API</a></li>
+        </ul>
+    </div>
+
+    <div class="vuln">
+        <h3>Небезопасное обновление профиля (Mass Assignment):</h3>
+        <form action="/update_profile" method="POST">
+            <input type="text" name="email" placeholder="Новый email"><br>
+            <input type="text" name="is_admin" placeholder="is_admin (0/1)"><br>
+            <button type="submit">Обновить</button>
+        </form>
+    </div>
+{% endblock %}

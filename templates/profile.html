@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Профиль пользователя</h2>
+    {% if user %}
+        <p><strong>ID:</strong> {{ user[0] }}</p>
+        <p><strong>Username:</strong> {{ user[1] }}</p>
+        <p><strong>Email:</strong> {{ user[3] }}</p>
+        {% if user[4] %}
+            <p><strong>Роль:</strong> Администратор</p>
+        {% else %}
+            <p><strong>Роль:</strong> Пользователь</p>
+        {% endif %}
+    {% else %}
+        <p>Пользователь не найден</p>
+    {% endif %}
+{% endblock %}

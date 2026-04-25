@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  vulnerable-app:
+    build: .
+    container_name: flask-vulnerable-app
+    ports:
+      - "5012:5012"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./database.db:/app/database.db
+    environment:
+      - FLASK_ENV=production
+      - FLASK_APP=main.py
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

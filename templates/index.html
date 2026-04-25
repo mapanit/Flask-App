@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>🔓 Flask Vulnerable App</h1>
+    <p>Этот сайт специально создан с уязвимостями для тестирования сканеров безопасности.</p>
+
+    <div class="vuln">
+        <h3>Список уязвимостей:</h3>
+        <ul>
+            <li>SQL Injection (login, search)</li>
+            <li>XSS (отраженный и хранимый)</li>
+            <li>Command Injection (ping)</li>
+            <li>Path Traversal (file download)</li>
+            <li>XXE (XML parsing)</li>
+            <li>Небезопасная десериализация</li>
+            <li>IDOR (профили пользователей)</li>
+            <li>Информационная утечка</li>
+            <li>CORS misconfiguration</li>
+            <li>SSRF</li>
+            <li>Broken Authentication</li>
+            <li>Mass Assignment</li>
+        </ul>
+    </div>
+
+    <h3>Быстрые тесты:</h3>
+    <form action="/search">
+        <input type="text" name="q" placeholder="Поиск (попробуйте <script>alert(1)</script>)" style="width: 300px;">
+        <button type="submit">Искать</button>
+    </form>
+
+    <h3>SQL Injection тест:</h3>
+    <form action="/login" method="POST">
+        <input type="text" name="username" placeholder="Логин (попробуйте ' OR '1'='1)">
+        <input type="password" name="password" placeholder="Пароль">
+        <button type="submit">Войти</button>
+    </form>
+
+    <h3>Command Injection:</h3>
+    <form action="/ping" method="POST">
+        <input type="text" name="host" placeholder="Хост (попробуйте 127.0.0.1; whoami)">
+        <button type="submit">Ping</button>
+    </form>
+{% endblock %}

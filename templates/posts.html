@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Посты и комментарии</h2>
+
+    <div class="vuln">
+        <h3>Добавить комментарий (XSS):</h3>
+        <form action="/comment" method="POST">
+            <textarea name="comment" rows="3" cols="50" placeholder="Введите комментарий..."></textarea><br>
+            <input type="hidden" name="post_id" value="1">
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <h3>Комментарии:</h3>
+    {% for comment in comments %}
+        <div>{{ comment[2] | safe }}</div> <!-- Уязвимость: хранимый XSS -->
+        <hr>
+    {% endfor %}
+{% endblock %}

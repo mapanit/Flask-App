@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Command Injection тест</h2>
+
+    <form method="POST">
+        <input type="text" name="host" placeholder="Введите хост" value="127.0.0.1" style="width: 300px;">
+        <button type="submit">Выполнить ping</button>
+    </form>
+
+    {% if output %}
+        <h3>Результат:</h3>
+        <pre>{{ output }}</pre>
+    {% endif %}
+{% endblock %}

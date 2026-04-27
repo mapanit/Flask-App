@@ -28,7 +28,7 @@
 
 ```bash
 # Перейти в директорию проекта
-cd /path/to/test
+cd /Flask-App
 
 # Запустить приложение
 docker-compose up --build
